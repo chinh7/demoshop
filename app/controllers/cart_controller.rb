@@ -3,6 +3,9 @@ class CartController < ApplicationController
 
   after_action :save_current_cart
 
+  def index
+  end
+
   def add_item
     current_cart.add_item(params[:item_id])
     redirect_to root_path
@@ -10,6 +13,6 @@ class CartController < ApplicationController
 
   def remove_item
     current_cart.remove_item(params[:item_id])
-    redirect_to root_path
+    redirect_to cart_path
   end
 end

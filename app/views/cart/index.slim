@@ -1,0 +1,19 @@
+= link_to 'Home', root_path
+table.items
+  tr.header
+    th Name
+    th Price
+    th asd
+  - current_cart.items.each do |item_id|
+    - item = Item.find(item_id)
+    tr.item
+      td = item.name
+      td = number_to_currency(item.price)
+      td
+        = form_tag controller: :cart, action: :remove_item
+          = hidden_field_tag "item_id", item.id
+          = submit_tag 'Remove'
+  tr.footer
+    th Total: 
+    th = number_to_currency(current_cart.total_price)
+    th

@@ -10,7 +10,7 @@ h1 Welcome
     - @items.each do |item|
       tr.item
         td = item.name
-        td = item.price
+        td = number_to_currency(item.price)
         td
           = form_tag controller: :cart, action: :add_item
             = hidden_field_tag "item_id", item.id

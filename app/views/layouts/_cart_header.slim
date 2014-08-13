@@ -1,1 +1,3 @@
-.cart-header Your cart has: #{pluralize(current_cart.items.count, 'item')}
+.cart-header
+  span> Your cart has: #{pluralize(current_cart.items.count, 'item')} -
+  = link_to 'Checkout', cart_path

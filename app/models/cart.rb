@@ -9,6 +9,17 @@ class Cart
     self.items << item_id
   end
 
+  def remove_item(item_id)
+    self.items.delete_at(self.items.index(item_id))
+  end
+
+  def total_price
+    self.items.map do |item_id|
+      item = Item.find(item_id)
+      item.price
+    end.sum
+  end
+
   def as_json
     {
       items: items
