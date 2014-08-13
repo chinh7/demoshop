@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+.cart-header, .session-links {
+  float: right;
+}
+.clearfix {
+  clear: both;
+}
