@@ -1,0 +1,23 @@
+h4 user_id: #{@quoine_token.quoine_user_id}
+h4 token: #{@quoine_token.value}
+h4 callback: #{@quoine_token.callback}
+hr
+= form_tag controller: :quoine_tokens, action: :create do
+  .field
+    label
+      span> Quoine username:
+      = text_field_tag 'email'
+  .field
+    label
+      span> Quoine password:
+      = password_field_tag 'password'
+  .field
+    = submit_tag 'Get token'
+
+= form_tag controller: :quoine_tokens, action: :set_callback do
+  .field
+    label
+      span> Quoine callback:
+      = text_field_tag 'callback'
+  .field
+    = submit_tag 'Set Callback'

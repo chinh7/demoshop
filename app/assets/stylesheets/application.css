@@ -20,3 +20,14 @@
 .clearfix {
   clear: both;
 }
+
+.orders-table {
+  text-align: center;
+}
+.btc-address {
+  text-align: center;
+}
+.qrcode img{
+  width: 100px;
+  height: 100px;
+}

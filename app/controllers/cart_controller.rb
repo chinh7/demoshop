@@ -15,4 +15,5 @@ class CartController < ApplicationController
     current_cart.remove_item(params[:item_id])
     redirect_to cart_path
   end
+
 end

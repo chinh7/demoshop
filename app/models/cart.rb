@@ -26,6 +26,30 @@ class Cart
     }.to_json
   end
 
+  def create_order(user_id)
+    quoine_token = QuoineToken.first
+    raise "Quoine Token not found" unless quoine_token
+
+    order = Order.create(user_id: user_id, price: self.total_price)
+    items.each do |item_id|
+      order.order_items.create(item_id: item_id)
+    end
+
+    data = {
+      auth: quoine_token.to_auth,
+      price: order.price,
+      data: order.id
+    }.to_json
+
+    result = HTTPClient.new.post("#{ENV['QWALLET_URL']}/api/invoices",
+                                 data, {'Content-Type' => 'application/json'})
+    if result.code == 200
+      invoice = JSON.parse(result.content)
+      order.update(invoice_id: invoice['id'], invoice: invoice)
+    end
+    order
+  end
+
   def self.from_json(cart_json)
     if cart_json
       cart = JSON.parse(cart_json)

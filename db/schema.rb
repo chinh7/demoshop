@@ -11,11 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813025524) do
+ActiveRecord::Schema.define(version: 20140813143038) do
 
   create_table "items", force: true do |t|
     t.string   "name"
     t.decimal  "price",      precision: 16, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "order_items", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_items", ["item_id"], name: "index_order_items_on_item_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+
+  create_table "orders", force: true do |t|
+    t.integer  "user_id"
+    t.decimal  "price",      precision: 16, scale: 2
+    t.integer  "invoice_id"
+    t.text     "invoice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "quoine_tokens", force: true do |t|
+    t.integer  "quoine_user_id"
+    t.string   "value"
+    t.string   "callback"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

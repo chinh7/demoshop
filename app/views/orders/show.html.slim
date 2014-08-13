@@ -1,0 +1,14 @@
+h1 Order Detail
+
+.order_id Order ID: #{@order.id}
+.price Total Price: #{number_to_currency(@order.price)}
+.invoice_id Invoice ID: #{@order.invoice_id}
+.invoice_status
+  Invoice Status:
+  b  #{@order.invoice['status']}
+.btc_address= @order.invoice['invoice_address']['value']
+= image_tag(@order.invoice['invoice_address']['qrcode_url'])
+
+.instruction Please send BTC to the above address.
+.expire_time Expire time: #{DateTime.parse(@order.invoice['expired_at']).to_formatted_s(:short)}
+= link_to "All orders", orders_path

@@ -6,4 +6,8 @@ module ApplicationHelper
   def save_current_cart
     session['current_cart'] = current_cart.as_json
   end
+
+  def clear_current_cart
+    session['current_cart'] = nil
+  end
 end

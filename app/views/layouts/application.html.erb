@@ -10,6 +10,7 @@
 
 
 <div class='session-links'>
+  <%= link_to 'Home', root_path %>
   <% if signed_in? %>
     Signed in with <%= current_user.email %>
     <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>

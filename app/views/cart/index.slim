@@ -3,7 +3,7 @@ table.items
   tr.header
     th Name
     th Price
-    th asd
+    th
   - current_cart.items.each do |item_id|
     - item = Item.find(item_id)
     tr.item
@@ -17,3 +17,5 @@ table.items
     th Total: 
     th = number_to_currency(current_cart.total_price)
     th
+= form_tag controller: :orders, action: :create do
+  = submit_tag 'Checkout'
