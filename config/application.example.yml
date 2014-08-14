@@ -1,0 +1,4 @@
+development:
+  QWALLET_URL: http://localhost:3000
+production:
+  QWALLET_URL: https://wallet-stag.quoine.com

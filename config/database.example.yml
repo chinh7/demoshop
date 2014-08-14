@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+
+development:
+  <<: *default
+  database: merchant_development
+
+test:
+  <<: *default
+  database: merchant_test
+
+production:
+  <<: *default
+  database: merchant_production
+  username: postgres
