@@ -13,7 +13,8 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 set :domain, '128.199.241.140' # wallet-stag.quoine.com
 
 set :deploy_to, '/var/www/demoshop'
-set :repository, 'git@bitbucket.org:dunghuynh/demoshop.git'
+set :repository, 'git@github.com:quoine/demoshop.git'
+
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
