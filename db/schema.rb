@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140813143038) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "items", force: true do |t|
     t.string   "name"
     t.decimal  "price",      precision: 16, scale: 2
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(version: 20140813143038) do
     t.datetime "updated_at"
   end
 
-  add_index "order_items", ["item_id"], name: "index_order_items_on_item_id"
-  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+  add_index "order_items", ["item_id"], name: "index_order_items_on_item_id", using: :btree
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "user_id"
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140813143038) do
     t.datetime "updated_at"
   end
 
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "quoine_tokens", force: true do |t|
     t.integer  "quoine_user_id"
@@ -64,7 +67,7 @@ ActiveRecord::Schema.define(version: 20140813143038) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

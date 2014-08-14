@@ -48,4 +48,5 @@ gem 'unicorn'
 group :development, :test do
   gem 'byebug'
   gem 'mina'
+  gem 'quiet_assets'
 end
