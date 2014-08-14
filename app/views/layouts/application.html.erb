@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MerchantDemo</title>
+  <title>Demoshop</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,16 +9,7 @@
 <body>
 
 
-<div class='session-links'>
-  <%= link_to 'Home', root_path %>
-  <% if signed_in? %>
-    Signed in with <%= current_user.email %>
-    <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Sign In', new_user_session_path %>
-    <%= link_to 'Sign Up', new_user_registration_path %>
-  <% end %>
-</div>
+<%= render 'layouts/header_links' %>
 <div class='clearfix'></div>
 
 <%= render 'layouts/cart_header' %>

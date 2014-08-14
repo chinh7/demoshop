@@ -3,14 +3,14 @@ working_directory APP_ROOT
 worker_processes 2
 timeout 60
 preload_app true
-listen "/tmp/merchant_unicorn.sock", :backlog => 64
-pid APP_ROOT + "/tmp/pids/merchant_unicorn.pid"
-stderr_path APP_ROOT + "/log/merchant_unicorn.stderr.log"
-stdout_path APP_ROOT + "/log/merchant_unicorn.stdout.log"
+listen "/tmp/demoshop_unicorn.sock", :backlog => 64
+pid APP_ROOT + "/tmp/pids/demoshop_unicorn.pid"
+stderr_path APP_ROOT + "/log/demoshop_unicorn.stderr.log"
+stdout_path APP_ROOT + "/log/demoshop_unicorn.stdout.log"
 
 before_fork do |server, worker|
   ActiveRecord::Base.connection.disconnect!
-  old_pid = Rails.root + 'tmp/pids/merchant_unicorn.pid.oldbin'
+  old_pid = Rails.root + 'tmp/pids/demoshop_unicorn.pid.oldbin'
   Rails.logger.warn("[UNICORN] old_pid=#{old_pid}")
   Rails.logger.warn("[UNICORN] server.pid=#{server.pid}")
   if File.exists?(old_pid) && server.pid != old_pid

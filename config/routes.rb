@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post :quoine_payments
   end
 
+  get 'admin' => 'admin#index'
   get 'cart' => 'cart#index'
 
   root to: "home#index"

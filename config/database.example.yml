@@ -5,13 +5,13 @@ default: &default
 
 development:
   <<: *default
-  database: merchant_development
+  database: demoshop_development
 
 test:
   <<: *default
-  database: merchant_test
+  database: demoshop_test
 
 production:
   <<: *default
-  database: merchant_production
+  database: demoshop_production
   username: postgres

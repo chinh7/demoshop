@@ -14,8 +14,13 @@
  *= require_self
  */
 
-.cart-header, .session-links {
+.cart-header {
   float: right;
+}
+
+.header-links .link {
+  display: inline-block;
+  margin: 10px;
 }
 .clearfix {
   clear: both;

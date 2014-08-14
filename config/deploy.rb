@@ -12,8 +12,8 @@ require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 
 set :domain, '128.199.241.140' # wallet-stag.quoine.com
 
-set :deploy_to, '/var/www/merchant_demo'
-set :repository, 'git@bitbucket.org:dunghuynh/merchantdemo.git'
+set :deploy_to, '/var/www/demoshop'
+set :repository, 'git@bitbucket.org:dunghuynh/demoshop.git'
 set :branch, 'master'
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
@@ -75,7 +75,7 @@ end
 
 desc "Restart Apps"
 task :restart => :environment do
-  queue! "service merchant_unicorn reload"
+  queue! "service demoshop_unicorn reload"
 end
 
 # For help in making your deploy script, see the Mina documentation:
