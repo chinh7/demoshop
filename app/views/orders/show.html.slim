@@ -1,14 +1,27 @@
-h1 Order Detail
+= link_to "All orders", orders_path
+h1 Order #{@order.id}
 
-.order_id Order ID: #{@order.id}
-.price Total Price: #{number_to_currency(@order.price)}
-.invoice_id Invoice ID: #{@order.invoice_id}
+= image_tag(@order.invoice['invoice_address']['qrcode_url'])
 .invoice_status
   Invoice Status:
-  b  #{@order.invoice['status']}
+  strong  #{@order.invoice['status']}
+.price Total Price: #{number_to_currency(@order.price)}
+.invoice_id Invoice ID: #{@order.invoice_id}
 .btc_address= @order.invoice['invoice_address']['value']
-= image_tag(@order.invoice['invoice_address']['qrcode_url'])
 
 .instruction Please send BTC to the above address.
 .expire_time Expire time: #{DateTime.parse(@order.invoice['expired_at']).to_formatted_s(:short)}
-= link_to "All orders", orders_path
+
+hr
+table.items
+  tr.header
+    th Name
+    th Price
+    th
+  - @order.items.each do |item|
+    tr.item
+      td = item.name
+      td = number_to_currency(item.price)
+  tr.footer
+    th Total: 
+    th = number_to_currency(@order.price)
