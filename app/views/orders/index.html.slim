@@ -5,6 +5,7 @@ table.orders-table
     tr
       th ID
       th Price
+      th BTC Price
       th Invoice ID
       th Invoice status
       th BTC Address
@@ -17,12 +18,14 @@ table.orders-table
       tr
         td = order.id
         td = number_to_currency(order.price)
+        td = order.invoice['sat_price'].to_f / 100000000
         td = order.invoice_id
         td = order.invoice['status']
         td.btc-address
           .qrcode= image_tag(order.invoice['invoice_address']['qrcode_url'])
           = order.invoice['invoice_address']['value']
         td = DateTime.parse(order.invoice['expired_at']).to_formatted_s(:short)
+
         td = link_to 'Show', order
         td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
 

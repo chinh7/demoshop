@@ -25,3 +25,6 @@ table.items
   tr.footer
     th Total: 
     th = number_to_currency(@order.price)
+  tr.footer
+    th BTC: 
+    th = @order.invoice['sat_price'].to_f / 100000000
