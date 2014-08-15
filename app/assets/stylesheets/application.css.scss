@@ -1,0 +1,12 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-theme-cerulean';
+
+.invoice-detail .qrcode img {
+  width: 100%;
+}
+
+.orders-table .qrcode img {
+  width: 100px;
+  height: 100px;
+}

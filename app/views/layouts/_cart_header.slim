@@ -1,3 +1,9 @@
-.cart-header
-  span> Your cart has: #{pluralize(current_cart.items.count, 'item')} -
-  = link_to 'Checkout', cart_path
+#banner.page-header
+  .row
+    .col-md-8.col-sm-6
+      h1 Demo Shop
+      p.lead Quoine Payments Demo Shop
+    .col-md-4.col-sm-6
+      .pull-right
+        span> Your cart has: #{pluralize(current_cart.items.count, 'item')}
+        = link_to 'Checkout', cart_path, class: 'btn btn-success btn-sm'

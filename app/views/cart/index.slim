@@ -1,6 +1,5 @@
-= link_to 'Home', root_path
-table.items
-  tr.header
+table.table.table-striped.table-hover.items
+  thead
     th Name
     th Price
     th
@@ -12,10 +11,11 @@ table.items
       td
         = form_tag controller: :cart, action: :remove_item
           = hidden_field_tag "item_id", item.id
-          = submit_tag 'Remove'
-  tr.footer
-    th Total: 
-    th = number_to_currency(current_cart.total_price)
-    th
+          = submit_tag 'Remove', class: 'btn btn-xs btn-danger'
+  tbody
+    tr.footer
+      th Total: 
+      th = number_to_currency(current_cart.total_price)
+      th
 = form_tag controller: :orders, action: :create do
-  = submit_tag 'Checkout'
+  = submit_tag 'Create Order', class: 'btn btn-success'

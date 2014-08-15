@@ -1,17 +1,17 @@
-h1 Welcome
-
 .items-list
   h2 All items
-  table.items
-    tr.header
-      th Name
-      th Price
-      th Action
-    - @items.each do |item|
-      tr.item
-        td = item.name
-        td = number_to_currency(item.price)
-        td
-          = form_tag controller: :cart, action: :add_item
-            = hidden_field_tag "item_id", item.id
-            = submit_tag 'Add to cart'
+
+.row
+  - @items.each do |item|
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title= item.name
+        .panel-body
+          .row
+            .col-xs-6
+              | Price: #{number_to_currency(item.price)}
+            .col-xs-6
+              .pull-right= form_tag controller: :cart, action: :add_item
+                = hidden_field_tag "item_id", item.id
+                = submit_tag 'Add to cart', class: 'btn btn-primary btn-xs'

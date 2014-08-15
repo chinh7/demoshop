@@ -2,23 +2,28 @@ h4 user_id: #{@quoine_token.quoine_user_id}
 h4 token: #{@quoine_token.value}
 h4 callback: #{@quoine_token.callback}
 hr
-= form_tag controller: :quoine_tokens, action: :create do
-  .field
-    label
-      span> Quoine username:
-      = text_field_tag 'email'
-  .field
-    label
-      span> Quoine password:
-      = password_field_tag 'password'
-  .field
-    = submit_tag 'Get token'
+= form_tag({controller: :quoine_tokens, action: :create}, {class: 'form-horizontal'}) do
+  fieldset
+    legend Get Token
+    .form-group
+      label.col-md-2.control-label Quoine username:
+      .col-md-10
+        = text_field_tag 'email', nil, class: 'form-control'
+    .form-group
+      label.col-md-2.control-label Quoine password:
+      .col-md-10
+        = password_field_tag 'password', nil, class: 'form-control'
+    .form-group
+      .col-md-10.col-md-offset-2
+        = submit_tag 'Get token', class: 'btn btn-primary'
 
-= form_tag controller: :quoine_tokens, action: :set_callback do
-  .field
-    label
-      span> Quoine callback:
-      = text_field_tag 'callback', nil
-    div Example: http://demoshop.com/callbacks/quoine_payments/DO_NOT_TELL_ANYONE
-  .field
-    = submit_tag 'Set Callback'
+= form_tag({controller: :quoine_tokens, action: :set_callback}, {class: 'form-horizontal'}) do
+  fieldset
+    legend Quoine callback
+    .form-group
+      label.col-md-2.control-label Callback url:
+      .col-md-10
+        = text_field_tag 'callback', @quoine_token.callback, class: 'form-control', placeholder: 'http://demoshop.com/callbacks/quoine_payments/DO_NOT_TELL_ANYONE'
+    .form-group
+      .col-md-10.col-md-offset-2
+        = submit_tag 'Set Callback', class: 'btn btn-primary'

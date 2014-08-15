@@ -1,6 +1,6 @@
 h1 All Orders
 
-table.orders-table
+table.table.table-striped.table-hover.orders-table
   thead
     tr
       th ID
@@ -20,7 +20,8 @@ table.orders-table
         td = number_to_currency(order.price)
         td = order.invoice['sat_price'].to_f / 100000000
         td = order.invoice_id
-        td = order.invoice['status']
+        td
+          span.label.label-success = order.invoice['status']
         td.btc-address
           .qrcode= image_tag(order.invoice['invoice_address']['qrcode_url'])
           = order.invoice['invoice_address']['value']
