@@ -9,9 +9,5 @@ html
     = render 'layouts/header'
     .container
       = render 'layouts/cart_header'
+      = render 'layouts/flash'
       = yield
-    /.clearfix
-    /= render 'layouts/cart_header'
-    /.clearfix
-    /p.notice= notice
-    /p.alert= alert
