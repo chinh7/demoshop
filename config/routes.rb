@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders do
+    member do
+      post :make_wallet_payment_request
+    end
+  end
 
   devise_for :users
   resources :items

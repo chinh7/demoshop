@@ -8,6 +8,16 @@
     .btc_address.label.label-primary= @order.invoice['invoice_address']['value']
     .instruction Please send BTC to the above address.
     .expire_time Expire time: #{DateTime.parse(@order.invoice['expired_at']).to_formatted_s(:short)}
+    br
+    .wallet-request
+      = form_tag({controller: :orders, action: :make_wallet_payment_request}, {class: 'form-horizontal'}) do
+        = hidden_field_tag 'id', @order.id
+        .form-group
+          .col-md-6
+            = text_field_tag 'email', current_user.email, class: 'form-control'
+          .col-md-6
+            = submit_tag 'Make wallet payment request', class: 'btn btn-success'
+
   .col-md-4
     .qrcode
       = image_tag(@order.invoice['invoice_address']['qrcode_url'])

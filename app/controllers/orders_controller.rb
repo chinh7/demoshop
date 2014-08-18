@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   include ApplicationHelper
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :make_wallet_payment_request]
   before_action :authenticate_user!
 
   # GET /orders
@@ -21,6 +21,15 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+  end
+
+  def make_wallet_payment_request
+    if @order.make_wallet_payment_request(params[:email])
+      flash.notice = "A payment request has been sent to wallet account: #{params[:email]}"
+    else
+      flash.alert = "Can not make wallet payment request"
+    end
+    redirect_to action: :show
   end
 
   # POST /orders
