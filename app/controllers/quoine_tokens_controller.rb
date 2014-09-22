@@ -15,7 +15,11 @@ class QuoineTokensController < ApplicationController
     @quoine_token = QuoineToken.first_or_create
     if result.code == 200
       token = JSON.parse(result.content)
-      @quoine_token.update(quoine_user_id: token['user_id'], value: token['token'])
+      @quoine_token.update(
+        quoine_user_id: token['user_id'],
+        value: token['token'],
+        callback: token['user']['payments_callback']
+      )
     else
       flash.alert = "Invalid email or password"
     end
