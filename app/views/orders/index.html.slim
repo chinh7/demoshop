@@ -8,6 +8,7 @@ table.table.table-striped.table-hover.orders-table
       th BTC Price
       th Invoice ID
       th Invoice status
+      th System status
       th BTC Address
       th Expire time
       th
@@ -21,10 +22,12 @@ table.table.table-striped.table-hover.orders-table
         td = order.invoice['sat_price'].to_f / 100000000
         td = order.invoice_id
         td
-          span.label.label-success = order.invoice['status']
+          span.label.label-success = order.invoice['invoice_status']
+        td
+          span.label.label-default = order.invoice['system_status']
         td.btc-address
-          .qrcode= image_tag(order.invoice['invoice_address']['qrcode_url'])
-          = order.invoice['invoice_address']['value']
+          .qrcode= image_tag(order.invoice['qrcode_url'])
+          = order.invoice['bitcoin_address']
         td = DateTime.parse(order.invoice['expired_at']).to_formatted_s(:short)
 
         td = link_to 'Show', order

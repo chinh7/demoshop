@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :items, through: :order_items
 
   serialize :invoice, Hash
@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
       request: {
         title: "Order #{id}",
         data: "Total price: $#{price}",
-        to_address: invoice["invoice_address"]["value"],
+        to_address: invoice["bitcoin_address"],
         sat_amount: invoice["sat_price"]
       }
     }.to_json

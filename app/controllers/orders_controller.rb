@@ -36,6 +36,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     order = current_cart.create_order(current_user.id)
+    return render status: 500, json: { error: 'Internal Server Error' } unless order.persisted?
     clear_current_cart
     redirect_to order_path(order)
   end

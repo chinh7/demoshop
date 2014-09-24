@@ -46,6 +46,8 @@ class Cart
     if result.code == 200
       invoice = JSON.parse(result.content)
       order.update(invoice_id: invoice['id'], invoice: invoice)
+    else
+      order.destroy
     end
     order
   end
