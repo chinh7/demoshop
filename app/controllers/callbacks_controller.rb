@@ -1,4 +1,6 @@
 class CallbacksController < ApplicationController
+  LOG_ROTATE_SIZE = 1.megabytes # bytes
+
   SECRET_KEY = 'DO_NOT_TELL_ANYONE'
 
   skip_before_filter :verify_authenticity_token
@@ -16,12 +18,11 @@ class CallbacksController < ApplicationController
   end
 
   def log_callback
-    FileUtils::mkdir_p Rails.root.join('log')
-    File.open(Rails.root.join('log/callback.log'), 'a') do |f|
-      f.puts "\n#{Time.current}:"
-      f.puts params
-    end
+    logger = Logger.new(Rails.root.join('log', 'callback.log'), 2, LOG_ROTATE_SIZE)
+    logger.debug("\n#{Time.current}:")
+    logger.debug(params)
   end
+
 
   private
   def check_secret_key

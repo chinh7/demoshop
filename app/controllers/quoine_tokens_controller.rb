@@ -20,8 +20,10 @@ class QuoineTokensController < ApplicationController
         value: token['token'],
         callback: token['user']['payments_callback']
       )
-    else
+    elsif result.code == 401
       flash.alert = "Invalid email or password"
+    else
+      flash.alert = "Something went wrong"
     end
     redirect_to action: :new
   end
