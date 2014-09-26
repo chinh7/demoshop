@@ -1,9 +1,7 @@
 class QuoineToken < ActiveRecord::Base
 
-  def to_auth
-    {
-      user_id: quoine_user_id,
-      token: value
-    }
+  def sign!(req)
+    req.headers['Content-Type'] = 'application/json'
+    ApiAuth.sign!(req, quoine_user_id, value)
   end
 end

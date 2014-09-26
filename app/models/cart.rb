@@ -36,20 +36,25 @@ class Cart
     end
 
     data = {
-      auth: quoine_token.to_auth,
       price: order.price,
       data: order.id
     }.to_json
 
-    result = HTTPClient.new.post("#{ENV['QWALLET_URL']}/api/invoices",
-                                 data, {'Content-Type' => 'application/json'})
-    if result.code == 200
-      invoice = JSON.parse(result.content)
-      order.update(invoice_id: invoice['id'], invoice: invoice)
-    else
-      order.destroy
+    req = RestClient::Request.new(
+      url: "#{ENV['QPAY_URL']}/api/invoices",
+      payload: data,
+      method: :post
+    )
+    quoine_token.sign!(req)
+    req.execute do |res, req, result|
+      if result.code == '200'
+        invoice = JSON.parse(res)
+        order.update(invoice_id: invoice['id'], invoice: invoice)
+      else
+        order.destroy
+      end
+      order
     end
-    order
   end
 
   def self.from_json(cart_json)

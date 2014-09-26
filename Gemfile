@@ -20,7 +20,9 @@ gem 'slim-rails'
 
 gem 'devise'
 
-gem 'httpclient'
+gem 'rest-client'
+gem 'api-auth'
+
 gem 'figaro'
 
 # Use jquery as the JavaScript library

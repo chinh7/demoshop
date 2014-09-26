@@ -7,7 +7,6 @@ class Order < ActiveRecord::Base
 
   def make_wallet_payment_request(email)
     data = {
-      auth: QuoineToken.first_or_create.to_auth,
       email: email,
       request: {
         title: "Order #{id}",
@@ -15,9 +14,15 @@ class Order < ActiveRecord::Base
         to_address: invoice["bitcoin_address"],
         sat_amount: invoice["sat_price"]
       }
-    }.to_json
-    result = HTTPClient.new.post("#{ENV['QWALLET_URL']}/api/out_requests",
-                                 data, {'Content-Type' => 'application/json'})
-    result.code == 200
+    }
+    req = RestClient::Request.new(
+      url: "#{ENV['QPAY_URL']}/api/out_requests",
+      payload: data,
+      method: :post
+    )
+
+    req.execute do |res, req, result|
+      result.code == '200'
+    end
   end
 end
