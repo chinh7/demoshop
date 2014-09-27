@@ -4,7 +4,7 @@ class CallbacksController < ApplicationController
   SECRET_KEY = 'DO_NOT_TELL_ANYONE'
 
   skip_before_filter :verify_authenticity_token
-  before_action :check_secret_key
+  before_action :authenticate_callback
   before_action :log_callback
 
   def quoine_payments
@@ -25,8 +25,11 @@ class CallbacksController < ApplicationController
 
 
   private
-  def check_secret_key
-    if params[:secret_key] != SECRET_KEY
+  def authenticate_callback
+    quoine_token = QuoineToken.first_or_create
+    user_id = ApiAuth.access_id(request)
+    if quoine_token.quoine_user_id != user_id.to_i ||
+      !ApiAuth.authentic?(request, quoine_token.value)
       render status: :unauthorized, json: {
         status: 'fail'
       }
