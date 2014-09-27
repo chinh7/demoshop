@@ -11,7 +11,7 @@ class QuoineTokensController < ApplicationController
       }
     }
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/payments_token",
+      url: "#{ENV['QPAY_URL']}/api/api_secret_key",
       payload: data,
       method: :post
     )
@@ -21,7 +21,7 @@ class QuoineTokensController < ApplicationController
         token = JSON.parse(res)
         @quoine_token.update(
           quoine_user_id: token['user_id'],
-          value: token['token'],
+          value: token['api_secret_key'],
           callback: token['user']['payments_callback']
         )
       elsif result.code == '401'
