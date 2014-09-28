@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   namespace 'callbacks' do
-    post 'quoine_payments/:secret_key', action: :quoine_payments
+    post 'quoine_payments', action: :quoine_payments
   end
 
   get 'admin' => 'admin#index'

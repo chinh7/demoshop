@@ -1,8 +1,6 @@
 class CallbacksController < ApplicationController
   LOG_ROTATE_SIZE = 1.megabytes # bytes
 
-  SECRET_KEY = 'DO_NOT_TELL_ANYONE'
-
   skip_before_filter :verify_authenticity_token
   before_action :authenticate_callback
   before_action :log_callback
