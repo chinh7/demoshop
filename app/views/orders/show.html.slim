@@ -6,7 +6,7 @@
       span.label.label-success  #{@order.invoice['invoice_status']}
     .system_status
       | System status: 
-      span.label.label-default  #{@order.invoice['invoice_status']}
+      span.label.label-default  #{@order.invoice['system_status']}
     .price Total Price: #{number_to_currency(@order.price)}
     .invoice_id Invoice ID: #{@order.invoice_id}
     .btc_address.label.label-primary= @order.invoice['bitcoin_address']
