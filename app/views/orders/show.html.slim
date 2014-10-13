@@ -13,7 +13,7 @@
     .instruction Please send BTC to the above address.
     .expire_time Expire time: #{DateTime.parse(@order.invoice['expired_at']).to_formatted_s(:short)}
     br
-    .wallet-request
+    /.wallet-request
       = form_tag({controller: :orders, action: :make_wallet_payment_request}, {class: 'form-horizontal'}) do
         = hidden_field_tag 'id', @order.id
         .form-group
