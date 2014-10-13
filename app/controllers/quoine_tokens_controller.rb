@@ -5,10 +5,8 @@ class QuoineTokensController < ApplicationController
 
   def create
     data = {
-      user: {
-        email: params[:email],
-        password: params[:password]
-      }
+      email: params[:email],
+      password: params[:password]
     }
     req = RestClient::Request.new(
       url: "#{ENV['QPAY_URL']}/api/api_secret_key",
