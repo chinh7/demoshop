@@ -12,7 +12,7 @@ class Order < ActiveRecord::Base
         title: "Order #{id}",
         data: "Total price: $#{price}",
         to_address: invoice["bitcoin_address"],
-        sat_amount: invoice["sat_price"]
+        amount: invoice["btc_price"]
       }
     }
     req = RestClient::Request.new(
