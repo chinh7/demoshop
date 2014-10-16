@@ -9,7 +9,7 @@ class QuoineTokensController < ApplicationController
       password: params[:password]
     }
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/api_secret_key",
+      url: "#{ENV['QPAY_URL']}/api/v1/api_secret_key",
       payload: data,
       method: :post
     )
@@ -38,7 +38,7 @@ class QuoineTokensController < ApplicationController
       callback: params[:callback]
     }.to_json
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/set_payments_callback",
+      url: "#{ENV['QPAY_URL']}/api/v1/set_payments_callback",
       payload: data,
       method: :post,
     )

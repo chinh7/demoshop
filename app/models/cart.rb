@@ -41,7 +41,7 @@ class Cart
     }.to_json
 
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/invoices",
+      url: "#{ENV['QPAY_URL']}/api/v1/invoices",
       payload: data,
       method: :post
     )

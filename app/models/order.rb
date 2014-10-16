@@ -16,7 +16,7 @@ class Order < ActiveRecord::Base
       }
     }
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/out_requests",
+      url: "#{ENV['QPAY_URL']}/api/v1/out_requests",
       payload: data,
       method: :post
     )
