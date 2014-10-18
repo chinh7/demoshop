@@ -37,7 +37,8 @@ class Cart
 
     data = {
       price: order.price,
-      data: order.id
+      data: Item.select(:id, :name, :price).where(id: self.items).to_json,
+      name: "Invoice for order #{order.id}"
     }.to_json
 
     req = RestClient::Request.new(
