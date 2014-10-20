@@ -38,7 +38,7 @@ class QuoineTokensController < ApplicationController
       callback: params[:callback]
     }.to_json
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/v1/set_payments_callback",
+      url: "#{ENV['QPAY_URL']}/api/v1/payments_callback_url",
       payload: data,
       method: :post,
     )
