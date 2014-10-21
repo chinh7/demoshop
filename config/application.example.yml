@@ -1,4 +1,4 @@
 development:
   QPAY_URL: http://localhost:3000
 production:
-  QPAY_URL: https://pay-stag.quoine.com
+  QPAY_URL: https://pay.quoine.com
