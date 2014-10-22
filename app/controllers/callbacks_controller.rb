@@ -7,7 +7,8 @@ class CallbacksController < ApplicationController
 
   def quoine_payments
     if params[:invoice]
-      order = Order.find(params[:invoice][:data])
+      data = JSON.parse(params[:invoice][:data])
+      order = Order.find(data["order_id"])
       order.update(invoice_id: params[:invoice][:id], invoice: params[:invoice])
     end
     render json: {

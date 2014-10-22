@@ -37,7 +37,10 @@ class Cart
 
     data = {
       price: order.price,
-      data: Item.select(:id, :name, :price).where(id: self.items).to_json,
+      data: {
+        order_id: order.id,
+        items: Item.select(:id, :name, :price).where(id: self.items)
+      }.to_json,
       name: "Invoice for order #{order.id}"
     }.to_json
 
