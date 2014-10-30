@@ -6,16 +6,16 @@ hr
   fieldset
     legend Get Token
     .form-group
-      label.col-md-2.control-label Quoine username:
+      label.col-md-2.control-label Quoine user id:
       .col-md-10
-        = text_field_tag 'email', nil, class: 'form-control'
+        = text_field_tag 'quoine_user_id', @quoine_token.quoine_user_id, class: 'form-control'
     .form-group
-      label.col-md-2.control-label Quoine password:
+      label.col-md-2.control-label Quoine api secret key:
       .col-md-10
-        = password_field_tag 'password', nil, class: 'form-control'
+        = text_field_tag 'api_secret_key', @quoine_token.value, class: 'form-control'
     .form-group
       .col-md-10.col-md-offset-2
-        = submit_tag 'Get token', class: 'btn btn-primary'
+        = submit_tag 'Update api secret key', class: 'btn btn-primary'
 
 = form_tag({controller: :quoine_tokens, action: :set_callback}, {class: 'form-horizontal'}) do
   fieldset

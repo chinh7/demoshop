@@ -4,32 +4,25 @@ class QuoineTokensController < ApplicationController
   end
 
   def create
-    data = {
-      email: params[:email],
-      password: params[:password]
-    }
+    @quoine_token = QuoineToken.first_or_create
+    @quoine_token.quoine_user_id = params[:quoine_user_id]
+    @quoine_token.value = params[:api_secret_key]
     req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/v1/api_secret_key",
-      payload: data,
-      method: :post
+      url: "#{ENV['QPAY_URL']}/api/v1/profile",
+      method: :get
     )
-    req.execute do |res, req, result|
-      @quoine_token = QuoineToken.first_or_create
-      if result.code == '200'
-        token = JSON.parse(res)
-        @quoine_token.update(
-          quoine_user_id: token['user_id'],
-          value: token['api_secret_key'],
-          callback: token['user']['payments_callback']
-        )
-      elsif result.code == '401'
-        flash.alert = "Invalid email or password"
-      else
-        flash.alert = "Something went wrong"
-      end
-      redirect_to action: :new
-    end
+    @quoine_token.sign!(req)
 
+    req.execute do |res, req, result|
+      if result.code == '200'
+        @quoine_token.callback = JSON.parse(result.body)["settings"]["payments_callback"]
+        @quoine_token.save
+        flash.notice = 'Api secret key updated'
+      else
+        flash.alert = 'Invalid API secret key or user id'
+      end
+    end
+    redirect_to action: :new
   end
 
   def set_callback
@@ -40,7 +33,7 @@ class QuoineTokensController < ApplicationController
     req = RestClient::Request.new(
       url: "#{ENV['QPAY_URL']}/api/v1/payments_callback_url",
       payload: data,
-      method: :post,
+      method: :post
     )
     @quoine_token.sign!(req)
 
