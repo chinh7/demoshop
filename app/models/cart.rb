@@ -35,7 +35,9 @@ class Cart
       order.order_items.create(item_id: item_id)
     end
 
-    data = {
+    curl = Curl::Easy.new("#{ENV['QPAY_URL']}/api/v1/invoices")
+
+    curl.post_body = {
       price: order.price,
       data: {
         order_id: order.id,
@@ -44,21 +46,17 @@ class Cart
       name: "Invoice for order #{order.id}"
     }.to_json
 
-    req = RestClient::Request.new(
-      url: "#{ENV['QPAY_URL']}/api/v1/invoices",
-      payload: data,
-      method: :post
-    )
-    quoine_token.sign!(req)
-    req.execute do |res, req, result|
-      if result.code == '200'
-        invoice = JSON.parse(res)
-        order.update(invoice_id: invoice['id'], invoice: invoice)
-      else
-        order.destroy
-      end
-      order
+    quoine_token.sign!(curl)
+
+    curl.post
+
+    if curl.response_code == 200
+      invoice = JSON.parse(curl.body_str)
+      order.update(invoice_id: invoice['id'], invoice: invoice)
+    else
+      order.destroy
     end
+    order
   end
 
   def self.from_json(cart_json)

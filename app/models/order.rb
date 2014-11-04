@@ -6,6 +6,9 @@ class Order < ActiveRecord::Base
   serialize :invoice, Hash
 
   def make_wallet_payment_request(email)
+    # TODO
+    raise "Unimplemented"
+
     data = {
       email: email,
       request: {

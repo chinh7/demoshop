@@ -20,7 +20,7 @@ gem 'slim-rails'
 
 gem 'devise'
 
-gem 'rest-client'
+gem 'curb'
 gem 'api-auth'
 
 gem 'figaro'
