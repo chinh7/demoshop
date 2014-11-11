@@ -42,4 +42,4 @@ table.table.table-striped.table-hover.items
     th = number_to_currency(@order.price)
   tr.success
     th BTC: 
-    th= @order.invoice['btc_price']
+    th= "%.08f" % @order.invoice['btc_price']
