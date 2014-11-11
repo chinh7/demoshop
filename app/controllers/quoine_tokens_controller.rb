@@ -1,4 +1,6 @@
 class QuoineTokensController < ApplicationController
+  before_filter :authenticate_admin!
+
   def new
     @quoine_token = QuoineToken.first_or_create
   end

@@ -8,10 +8,10 @@
         span.icon-bar
     #navbar-main.navbar-collapse.collapse
       ul.nav.navbar-nav
-        li
-          = link_to 'Admin', admin_path
         - if signed_in?
           li= link_to 'Orders', orders_path
+          - if current_user.is_admin
+            li= link_to 'Admin', admin_path
       ul.nav.navbar-nav.navbar-right
         - if signed_in?
           li.dropdown
