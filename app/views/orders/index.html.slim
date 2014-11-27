@@ -26,7 +26,7 @@ table.table.table-striped.table-hover.orders-table
         td
           span.label.label-default = order.invoice['system_status']
         td.btc-address
-          .qrcode= image_tag(order.invoice['qrcode_url'])
+          .qrcode= image_tag(order.invoice['qrcode_protocol_url'])
           = order.invoice['bitcoin_address']
         td = DateTime.parse(order.invoice['expired_at']).to_formatted_s(:short)
 
