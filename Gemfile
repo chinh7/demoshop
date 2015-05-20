@@ -21,7 +21,7 @@ gem 'slim-rails'
 gem 'devise'
 
 gem 'curb'
-gem 'api-auth'
+gem 'api-auth', github: 'chinh7/api_auth', branch: 'quoine'
 
 gem 'figaro'
 
@@ -53,4 +53,8 @@ group :development, :test do
   gem 'byebug'
   gem 'mina'
   gem 'quiet_assets'
+end
+
+group :production do
+  gem 'puma'
 end
