@@ -38,7 +38,7 @@ class Cart
     curl = Curl::Easy.new("#{ENV['QPAY_URL']}/api/v1/invoices")
 
     curl.post_body = {
-      price: order.price,
+      amount: order.price,
       data: {
         order_id: order.id,
         items: Item.select(:id, :name, :price).where(id: self.items)
