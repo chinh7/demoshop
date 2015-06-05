@@ -6,11 +6,10 @@ class CallbacksController < ApplicationController
   before_action :log_callback
 
   def quoine_payments
-    if params[:invoice]
-      data = JSON.parse(params[:invoice][:data])
-      order = Order.find(data["order_id"])
-      order.update(invoice_id: params[:invoice][:id], invoice: params[:invoice])
-    end
+    data = JSON.parse(params[:data])
+    order = Order.find(data["order_id"])
+    order.update(invoice_id: params[:id], invoice: params)
+
     render json: {
       status: :success
     }
@@ -21,7 +20,6 @@ class CallbacksController < ApplicationController
     logger.debug("\n#{Time.current}:")
     logger.debug(params)
   end
-
 
   private
   def authenticate_callback
