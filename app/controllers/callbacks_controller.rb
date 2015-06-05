@@ -2,7 +2,7 @@ class CallbacksController < ApplicationController
   LOG_ROTATE_SIZE = 1.megabytes # bytes
 
   skip_before_filter :verify_authenticity_token
-  before_action :authenticate_callback
+  # before_action :authenticate_callback
   before_action :log_callback
 
   def quoine_payments
@@ -16,7 +16,7 @@ class CallbacksController < ApplicationController
   end
 
   def log_callback
-    logger = Logger.new(Rails.root.join('log', 'callback.log'), 2, LOG_ROTATE_SIZE)
+    logger = Logger.new(STDOUT)
     logger.debug("\n#{Time.current}:")
     logger.debug(params)
   end
